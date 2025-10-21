@@ -8,19 +8,27 @@ public class Bird extends Animal {
     private String family;
     private int maxFlightHeight;
 
-//Добавление конструктора Bird
+    //Добавление конструктора Bird
     public Bird(String family, int maxFlightHeight, String color, int maxLifeSpan, String foodType) {
         super(color, maxLifeSpan, foodType); //вызов конструктора родительского класса Animal
         this.family = family;
         this.maxFlightHeight = maxFlightHeight;
     }
 
-//метод петь
+    public String getFamily() {
+        return family;
+    }
+
+    public int getMaxFlightHeight() {
+        return maxFlightHeight;
+    }
+
+    //метод петь
     public void sing() {
         System.out.println(family + " поёт");
     }
 
-//метод клевать
+    //метод клевать
     public void peck() {
         System.out.println(family + " клюёт");
     }
@@ -34,13 +42,14 @@ public class Bird extends Animal {
     public void makeSound() {
         System.out.println(family + " издает звук");
     }
+
     //метод "Животное играет"
     @Override
     public void play() {
         System.out.println(family + " играет");
     }
 
-//1.2 Реализовать метод, который будет выводить информацию о собаке, птице, животном (toString)
+    //1.2 Реализовать метод, который будет выводить информацию о собаке, птице, животном (toString)
     @Override
     public String toString() {
         return "Птица: " + family + ", Макс. высота полёта: " + maxFlightHeight + " м, " + super.toString();
@@ -48,18 +57,24 @@ public class Bird extends Animal {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Bird)) return false;
+        if (!(obj instanceof Bird)) {
+            return false;
+        }
         Bird bird = (Bird) obj;
-        return maxFlightHeight == bird.maxFlightHeight &&
-                Objects.equals(family, bird.family) &&
-                Objects.equals(color, bird.color) &&
-                maxLifeSpan == bird.maxLifeSpan &&
-                Objects.equals(foodType, bird.foodType);
+        if (family.equals(bird.getFamily())
+                && maxFlightHeight == (bird.getMaxFlightHeight())
+                && foodType.equals(bird.getFoodType())
+                && color.equals(bird.getColor())
+                && maxLifeSpan == (bird.getMaxLifeSpan())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(family, maxFlightHeight, color, maxLifeSpan, foodType);
+        int result = family.hashCode() + maxLifeSpan + maxFlightHeight + foodType.hashCode() + color.hashCode();
+        return  result;
     }
 }
+

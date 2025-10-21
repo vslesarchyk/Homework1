@@ -16,6 +16,18 @@ public class Animal {
         this.foodType = foodType;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public int getMaxLifeSpan() {
+        return maxLifeSpan;
+    }
+
+    public String getFoodType() {
+        return foodType;
+    }
+
     public void makeSound() {
         System.out.println("Животное издаёт звук");
     }

@@ -9,7 +9,7 @@ public class Dog extends Animal {
     private String breed;
     private double averageWeight;
 
-//добавление конструктора Dog
+    //добавление конструктора Dog
     public Dog(String name, String breed, double averageWeight, String color, int maxLifeSpan, String foodType) {
         super(color, maxLifeSpan, foodType); //вызов конструктора родительского класса Animal
         this.name = name;
@@ -17,38 +17,51 @@ public class Dog extends Animal {
         this.averageWeight = averageWeight;
     }
 
-//метод лаять
+    public String getName() {
+        return name;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public double getAverageWeight() {
+        return averageWeight;
+    }
+
+    //метод лаять
     public void bark() {
         System.out.println(name + " лает");
     }
 
-//метод кусать
+    //метод кусать
     public void bite() {
         System.out.println(name + " кусает");
     }
 
-//метод бегать
+    //метод бегать
     public void run() {
         System.out.println(name + " бегает");
     }
-//метод прыгать
+
+    //метод прыгать
     public void jump() {
         System.out.println(name + " прыгает");
     }
 
-//метод "Животное издаёт звук"
+    //метод "Животное издаёт звук"
     @Override
     public void makeSound() {
         System.out.println(name + " издаёт звук");
     }
 
- //метод "Животное играет"
+    //метод "Животное играет"
     @Override
     public void play() {
         System.out.println(name + " играет");
     }
 
-//1.2 Реализовать метод, который будет выводить информацию о собаке, птице, животном (toString)
+    //1.2 Реализовать метод, который будет выводить информацию о собаке, птице, животном (toString)
     @Override
     public String toString() {
         return "Собака: " + name + ", Порода: " + breed + ", Вес: " + averageWeight + " кг, " + super.toString();
@@ -56,19 +69,26 @@ public class Dog extends Animal {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; //ссылаются-ли объекты на один и тот же адрес в памяти
-        if (!(obj instanceof Dog)) return false;
+        if (!(obj instanceof Dog)) {
+            return false;
+        }
         Dog dog = (Dog) obj;
-        return Double.compare(dog.averageWeight, averageWeight) == 0 && //сравнение
-                Objects.equals(name, dog.name) &&
-                Objects.equals(breed, dog.breed) &&
-                Objects.equals(color, dog.color) &&
-                maxLifeSpan == dog.maxLifeSpan &&
-                Objects.equals(foodType, dog.foodType);
+        if (name.equals(dog.getName())
+                && breed.equals(dog.getBreed())
+                && maxLifeSpan == (dog.getMaxLifeSpan())
+                && foodType.equals(dog.getFoodType())
+                && color.equals(dog.getColor())
+                && averageWeight == (dog.getAverageWeight())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, breed, averageWeight, color, maxLifeSpan, foodType);
+         int result = name.hashCode() + breed.hashCode() + maxLifeSpan + foodType.hashCode() + color.hashCode() + Double.hashCode(averageWeight);
+          return result;
     }
 }
+
+
